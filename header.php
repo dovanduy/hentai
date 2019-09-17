@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body>
 <div class="header">
     <nav class="navbar navbar-expand-md  fixed-top">
-        <a class="navbar-brand" href="#"><img src="<?php echo HENTAI_URL.'/img/logo.png';?>" alt=""></a>
+        <a class="navbar-brand" href="<?php echo home_url('/');?>"><img src="<?php echo HENTAI_URL.'/img/logo.png';?>" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="navbar-toggler-icon"></span> 
         </button>
@@ -41,9 +41,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn my-2 my-sm-0" type="submit"><i class="zi zi_searchBlack"></i></button>
             </form>
+            <?php if(!is_user_logged_in()):?>
             <div class="unlogin">
-                <a class="text-light nav-link" href="/login.html">đăng ký</a>
-                <a class="text-light nav-link" href="/register.html">đăng nhập</a>
+                <a class="text-light nav-link" href="<?php echo home_url('/').'dang-ky/';?>">đăng ký</a>
+                <a class="text-light nav-link" href="<?php echo home_url('/').'dang-nhap/';?>">đăng nhập</a>
                 <div class="dropdown d-inline">
                     <button class="btn btn-outline-dark dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         VI
@@ -55,14 +56,22 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </div>
             </div>
+            <?php else:
+                
+                $current_user = wp_get_current_user(); 
+                $userimg = get_user_meta($current_user->ID,'avatar',true);
+                if($userimg == '') {
+                  $userimg = HENTAI_URL.'/img/user.png';
+                }      
+            ?>
             <div class="islogin">
                 <div class="dropdown d-inline">
-                    <a class="nav-link dropdown-toggle text-light" href="javascript:;" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo HENTAI_URL.'/img/user.png';?>" width="40" alt="" style="margin-right: 10px;">Dropdown</a>
+                    <a class="nav-link dropdown-toggle text-light" href="javascript:;" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo HENTAI_URL.'/img/user.png';?>" width="40" alt="" style="margin-right: 10px;"><?php echo $current_user->user_login;?></a>
                     <div class="dropdown-menu dropdown-menu-right text-light" aria-labelledby="dropdown03">
-                        <a class="dropdown-item" href="#"><img src="<?php echo HENTAI_URL.'/img/user.png';?>" alt="">
+                        <a class="dropdown-item" href="#"><img src="<?php echo $userimg;?>" alt="user">
                             <div>
-                                <router-link :to="{name:'center'}" class="text-light">user</router-link>
-                                <span>email@123456455458gmail.com</span>
+                                <span><?php echo $current_user->user_login;?></span>
+                                <span><?php echo $current_user->user_email;?></span>
                             </div>
                         </a>
                         <a class="dropdown-item" href="#"><img src="<?php echo HENTAI_URL.'/img/set.png';?>" alt="">đăng ký</a>
@@ -80,7 +89,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </div>
             </div>
-
+            <?php endif;?>
         </div>
     </nav>
 

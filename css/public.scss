@@ -9,6 +9,10 @@ a:hover {
     text-decoration: none;
 }
 
+.fl {
+    float: left;
+}
+
 ol,
 ul,
 dl {
@@ -553,6 +557,40 @@ dl {
 .footer {
     background: #111;
     padding: 45px 0 27px;
+    .back_top {
+        position: fixed;
+        background: #080808;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 60PX;
+        right: 200px;
+        bottom: 170px;
+        cursor: pointer;
+        z-index: 99;
+        -webkit-transition: all 0.6s;
+        transition: all 0.6s;
+        cursor: pointer;
+        transition: all 0.6s;
+        display: none;
+        @media (max-width: 767px) {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 30PX;
+            right: 4vw;
+            bottom: 240px;
+        }
+        i {
+            color: #fff;
+            font-size: 16PX;
+            font-weight: bold;
+        }
+        &:hover {
+            background: #333;
+        }
+    }
     .foot_nav {
         margin: 30px auto;
     }
@@ -662,4 +700,8 @@ dl {
             }
         }
     }
+}
+
+#nav_bar.black_bg {
+    background: rgba(0, 0, 0, 0.3)
 }

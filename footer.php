@@ -75,5 +75,34 @@
 
         })
     </script>
+
+<script>
+        var swiper1 = new Swiper('.swiper-container-pic', {
+            // initialSlide: 1,
+            lazy: {
+                loadPrevNext: true,
+                loadPrevNextAmount: 1,
+            },
+            effect: 'slide',
+            //滑动速度
+            freeMode: true,
+            speed: 800,
+            //滑动方向
+            direction: 'horizontal',
+            slidesPerView: 5.3,
+            spaceBetween: 30,
+            centeredSlides: false,
+            breakpoints: { //响应布局设置
+                767: { //如果屏幕宽度小于<640
+                    slidesPerView: 2, //每页显示1个
+                    spaceBetween: 5 //每个间距是10
+                }
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 </body>
 </html>

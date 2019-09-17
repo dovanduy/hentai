@@ -268,7 +268,6 @@
 }
 
 .dialog_pic {
-  display: none;
   position: fixed;
   background: rgba(0, 0, 0, 0.9);
   width: 100%;

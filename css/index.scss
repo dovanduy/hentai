@@ -1,0 +1,215 @@
+.index_box {
+    background-size: cover;
+    background: #1d1d1d;
+    @media (max-width: 767px) {}
+    .banner {
+        img {
+            width: 100%;
+        }
+        .banner_info {
+            width: 750px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            margin-left: -375px;
+            top: 50%;
+            margin-top: -150px;
+            padding: 0 50px;
+            @media (max-width: 767px) {
+                width: 100%;
+                left: 0;
+                margin-left: 0;
+                top: 50px;
+                margin-top: 0px;
+                padding: 0 20px;
+                height: auto;
+            }
+            .title {
+                display: block;
+                color: #eee;
+                font-size: 50px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                @media (max-width: 767px) {
+                    text-align: center;
+                    font-size: 15px;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+            .cnt {
+                font-size: 20px;
+                color: #eee;
+                line-height: 40px;
+                @media (max-width: 767px) {
+                    font-size: 13px;
+                    line-height: 20px;
+                }
+                em {
+                    color: #00fcff;
+                }
+            }
+        }
+    }
+    div[class^="main_type"] {
+        width: calc( 100% - 40px);
+        overflow: hidden;
+        margin: 0 auto;
+        padding-bottom: 20px;
+        @media (max-width: 767px) {
+            width: calc( 100% - 10px);
+        }
+        .list_head {
+            height: 70px;
+            width: 100%;
+        }
+        .add_box {
+            text-align: center;
+            a {
+                img {
+                    max-width: 100%;
+                    padding-top: 20px;
+                }
+            }
+        }
+        .title {
+            color: #eee;
+            font-size: 28px;
+            line-height: 30px;
+            text-transform: uppercase;
+        }
+        .all_list {
+            width: 300px;
+            height: 50px;
+            a {
+                display: block;
+                width: 140px;
+                height: 50px;
+                border-radius: 25px;
+                background: #171717;
+                border: 1px solid #333;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                -webkit-transition: all 0.6s;
+                transition: all 0.6s;
+                color: #eee;
+                font-size: 16px;
+                line-height: 50px;
+                text-align: center;
+            }
+        }
+        @media (max-width: 767px) {
+            .list_head {
+                height: 40px;
+                .fl.title {
+                    // width: 100%;
+                    font-size: 16px;
+                }
+                .fr.all_list {
+                    width: 35vw;
+                    height: 30px;
+                    a {
+                        display: block;
+                        width: 50px;
+                        height: 30px;
+                        border-radius: 15px;
+                        background: #171717;
+                        border: 1px solid #333;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        -webkit-transition: all 0.6s;
+                        transition: all 0.6s;
+                        color: #eee;
+                        font-size: 12px;
+                        line-height: 30px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .cnt {
+            text-align: center;
+            background: #111;
+            padding-top: 10px;
+            h2 {
+                color: #eee;
+                font-size: 18px;
+                line-height: 25px;
+                margin-bottom: 0;
+                @media (max-width: 767px) {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+            }
+            span {
+                font-size: 16px;
+                color: #b8b8b8;
+                line-height: 30px;
+                @media (max-width: 767px) {
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+        .swiper-slide {
+            background: #111;
+            text-align: center;
+            border-radius: 0 0 5px 5px;
+            position: relative;
+            -webkit-transition: 0.6s;
+            transition: 0.6s;
+            overflow: hidden;
+            width: calc((100% - 150px)/6);
+            img {
+                width: 100%;
+            }
+            &:hover {
+                top: -5px;
+                -webkit-box-shadow: 0 0px 20px 2px rgba(0, 255, 255, 0.3);
+                box-shadow: 0 0px 20px 2px rgba(0, 255, 255, 0.3);
+            }
+        }
+        .swiper-container {
+            overflow: unset;
+        }
+        .swiper-button-prev {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background-color: #171717;
+            background-size: 20px 20px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            right: 70px;
+            left: auto;
+            top: -48px;
+            @media (max-width: 767px) {
+                width: 30px;
+                height: 30px;
+                background-size: 16px 16px;
+                right: 40px;
+                top: -18px;
+            }
+        }
+        .swiper-button-next {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background-color: #171717;
+            background-size: 20px 20px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            right: 10px;
+            left: auto;
+            top: -48px;
+            @media (max-width: 767px) {
+                width: 30px;
+                height: 30px;
+                background-size: 16px 16px;
+                top: -18px;
+            }
+        }
+    }
+}
