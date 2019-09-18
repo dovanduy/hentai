@@ -104,12 +104,19 @@ $support = new HenTai_Theme_Support;
 
 // Redirect When Login And Register Page
 require_once HENTAI_PATH.'/inc/login-register-redirect.php';
+
+
 // Add Register Page Func
 require_once HENTAI_PATH.'/inc/register.php';
 
 
-// Crop Image
 
+//Add MetaBox
+require_once HENTAI_PATH.'/inc/metabox.php';
+
+
+
+// Crop Image
 function HentaiCropImg($postID, $postcontent, $width, $height, $suffixes){
 
     global $support;

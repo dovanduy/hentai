@@ -3,7 +3,7 @@
 
 get_header();?>
 
-<div class="search_box pic_box" id="gallery">
+<div class="search_box" id="gallery">
     <div class="title">Thư Viện Ảnh</div>
     <div class="search_cnt">
         <ul class="cnt_box" v-if="images.length">
@@ -13,7 +13,7 @@ get_header();?>
             
         </ul>
     </div>
-    <div id="ampagination-bootstrap" data-pagination="{&quot;maxSize&quot;:5,&quot;totals&quot;:100,&quot;page&quot;:5,&quot;pageSize&quot;:10,&quot;lastText&quot;:&quot;Last&quot;,&quot;firstText&quot;:&quot;First&quot;,&quot;prevText&quot;:&quot;Previous&quot;,&quot;nextText&quot;:&quot;Next&quot;,&quot;rotate&quot;:true,&quot;directionLinks&quot;:true,&quot;boundaryLinks&quot;:true,&quot;theme&quot;:&quot;bootstrap&quot;,&quot;btnSize&quot;:&quot;&quot;}">
+    <div id="ampagination-bootstrap" >
         <ul class="pagination" v-if="pageNumber.length">
             <li v-for="(page,index) in pageNumber" :key="index" :class="page == currentPage ? 'active':''">
                 <a href="javascript:;" @click="updatePage(page)">{{page}}</a>
@@ -80,6 +80,7 @@ get_header();?>
                 return rangeWithDots;
             },
             updatePage(number) {
+                if(number == '...') return;
                 this.currentPage = number;
             },
             openDialog(img) {

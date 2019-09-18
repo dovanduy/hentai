@@ -1,5 +1,5 @@
 <?php get_header();?>
-<div class="search_box pic_box">
+<div class="search_box">
     <div class="title"><?php echo archiveTitle();?></div>
     <div class="search_cnt">
         <ul class="cnt_box">
