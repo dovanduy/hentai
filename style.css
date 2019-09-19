@@ -6,3 +6,96 @@ Author URI: https://ooxxhd.com/
 Description: This is very Simple Theme for Hentai Movie
 Text Domain: hentaivn
 */
+
+#breadcrumbs span,#breadcrumbs a{
+    color: #FFF;
+
+}
+.video_box .video_layout {
+    border-top: 1px solid #3a3a3a;
+}
+
+.video__content {
+    display: block;
+    padding: 15px 0;
+}
+.video__left img{
+   max-width: 100%;
+   margin: 0 auto;
+   display: block;
+}
+.top__right span {
+    display: block;
+}
+.top__date {
+    font-size: 1.4rem;
+    font-weight:700;
+}
+.espisode ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+.espisode ul li{
+    display: block;
+    margin:5px;
+}
+.espisode ul li a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #00fcff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00fcff;
+}
+.espisode ul li a:hover {
+    background: #00fcff;
+    color: #000;
+}
+.video__ft {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.video__ft a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 25px;
+    margin: 5px;
+    border: 1px solid #FFF;
+    color: #FFF;
+}
+.video__ft a:hover {
+    border-color: #00fcff;
+    color: #00fcff;
+}
+.espisode_number {
+    margin:10px auto;
+}
+.espisode ul li:first-child {
+    margin-left:0px;
+}
+.body__ct span{
+    font-weight: 500;
+    display: block;
+    margin-bottom: 10px;
+}
+.top__left h4 a {
+    color: #FFF;
+    text-decoration: underline;
+}
+@media (min-width:968px) {
+    .video__content {
+        display: grid;
+        grid-template-columns: 3fr 7fr;
+        grid-gap: 15px;
+    }
+    .right__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
