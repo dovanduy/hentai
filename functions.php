@@ -221,3 +221,140 @@ function get_gallery_vue() {
     echo json_encode($images);
     exit;
 }
+
+
+// Show SLider Func
+
+function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id = "", $title = "Phim Mới Nhất",$pos="home") {
+    
+    $args = ['post_type' => 'post','post_per_page' => $number];
+
+    $link = $cat!= 0? get_category_link($cat): 'javascript:;';
+
+    if($type == 'lastest') {
+        $args['orderby'] = 'ID';
+        $args['order'] = 'DESC';
+        if($cat != 0) {
+            $args['category__in'] = [$cat];
+        }
+    }
+    if($type == 'random') {
+        $args['orderby'] = 'rand';
+
+        if($cat != 0) {
+            $args['category__in'] = [$cat];
+        }
+    }
+
+    if($type == 'most') {
+        $args['meta_key'] = 'views';
+        $args['orderby'] = 'meta_value_num';
+        
+        if($cat != 0) {
+            $args['category__in'] = [$cat];
+        }
+    }
+    if($opt == 'related-cat' || $opt == 'related-tag') {
+        if($post_id != '' && $cat == 0) {
+            if($opt == 'related-cat') {
+                $categories = get_the_category($post_id);
+                $category_ids = [];
+                foreach($categories as $cat) {
+                    $category_ids[] = $cat->term_id;
+                }
+                $args['category__in'] = $category_ids;
+                $args['post__not_in'] = [$post_id];
+            }
+            if($opt == 'related-tag') {
+                $tags = get_the_tags($post_id);
+                $tag_ids = [];
+                foreach($tags as $tag) {
+                    $tag_ids[] = $tag->term_id;
+                }
+                $args['tag__in'] = $tag_ids;
+                $args['post__not_in'] = [$post_id];
+            }
+        }
+    }
+    $wrap = '';
+    $head = '';
+    $item = 6.3;
+    $space = 30;
+    if($pos === 'home') {
+        $wrap = 'main_type1';
+        $head = '<div class="list_head clear">
+                    <div class="fl title">'.$title.'</div>
+                    <div class="fr all_list"><a href="'.$link.'">'.__("All","hentaivn").'</a></div>
+                </div>';
+    } else if($pos === 'single') {
+        $wrap = 'video_ralate';
+        $head = '<div class="list_head clear">
+                    <div class="fl title">'.$title.'</div>
+                    <div class="fr all_list"><a href="'.$link.'">'.__("All","hentaivn").'</a></div>
+                </div>';
+    } else {
+        $wrap = 'video_hot';
+        $head = '<div class="mv_title">'.$title.'</div>';
+        $item = 2;
+        $space = 10;
+    }
+
+    $oxx = new WP_Query($args);
+    $class_number = rand(1, 1000000);
+    ob_start();
+    if($oxx->have_posts()):
+    ?>
+    <div class="<?php echo $wrap;?>">
+        <?php echo $head;?>
+        <div class="swiper-container swiper-container-<?php echo $class_number;?>">
+            <div class="swiper-wrapper">
+                <?php while($oxx->have_posts()) : $oxx->the_post();
+                    $img = HentaiCropImg($oxx->post->ID,$oxx->post->post_content,268,394,'-hentai-img-slider-');
+                ?>
+                <div class="swiper-slide">
+                    <a href="<?php the_permalink();?>">
+                        <img data-src="<?php echo $img;?>" class="swiper-lazy" width="100%">
+                        <div class="swiper-lazy-preloader"></div>
+                        <div class="cnt">
+                            <h2><?php echo mb_substr(get_the_title(),0,20).'...';?></h2>
+                            <span><?php echo getpostviews(get_the_ID());?>  <?php echo __(' views','hentaivn');?></span>
+                        </div>
+                    </a>
+                </div>
+                <?php endwhile; wp_reset_postdata();?>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+    </div>
+    <script>
+        var swiper<?php echo $class_number;?> = new Swiper('.swiper-container-<?php echo $class_number;?>', {
+            lazy: {
+                loadPrevNext: true,
+                loadPrevNextAmount: 1,
+            },
+            effect: 'slide',
+            freeMode: true,
+            direction: 'horizontal',
+            speed: 300,
+            slidesPerView: <?php echo $item;?>,
+            spaceBetween: <?php echo $space;?>,
+            centeredSlides: false,
+            slidesPerGroup: <?php echo $item;?>,
+            breakpoints: { 
+                767: {
+                    slidesPerView: 2, 
+                    spaceBetween: 5 ,
+                    slidesPerGroup: 2
+                }
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+    <?php endif;
+    return ob_get_clean();
+}

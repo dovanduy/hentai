@@ -29,11 +29,16 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="collapse navbar-collapse" id="navbarsExample04">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <a class="nav-link dropdown-toggle text-light" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể Loại</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <?php
+                            $categories = get_categories();
+                            if($categories) {
+                                foreach($categories as $cat) {
+                                    echo '<a class="dropdown-item" href="'.get_category_link($cat->term_id).'">'.$cat->name.'</a>';
+                                }
+                            }
+                        ?>
                     </div>
                 </li>
             </ul>
@@ -84,8 +89,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                             VI
                         </button>
                     <div class="dropdown-menu dropdown-menu-right text-light" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">VI</a>
-                        <a class="dropdown-item" href="#">EN</a>
+                        <a class="dropdown-item" href="javascript:;">VI</a>
+                        <a class="dropdown-item" href="javascript:;">EN</a>
                     </div>
                 </div>
             </div>

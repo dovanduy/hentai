@@ -79,13 +79,51 @@ Text Domain: hentaivn
     margin-left:0px;
 }
 .body__ct span{
-    font-weight: 500;
     display: block;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    color: #5f5f5f;
 }
 .top__left h4 a {
     color: #FFF;
     text-decoration: underline;
+}
+.top__left span,.top__right span:first-child {
+    color: #5f5f5f;
+}
+.video__left {
+    margin-bottom: 15px;
+}
+.video__title h1 {
+    font-size: 1.2rem;
+    color: #00fcff;
+}
+.video__viewslike span {
+    display: inline-block;
+}
+.video__viewslike span:last-child {
+    color: #5f5f5f;
+}
+.video__viewslike span:first-child {
+    padding: 10px 15px;
+    border: 1px solid #FFF;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.top__video {
+    padding: 5px 0;
+    border-bottom: 1px solid #3a3a3a;
+}
+.foot_nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.foot_nav ul li {
+    display:block;
+    margin: 5px;
+}
+.foot_nav ul li a {
+    color: #FFF;
 }
 @media (min-width:968px) {
     .video__content {
@@ -94,6 +132,11 @@ Text Domain: hentaivn
         grid-gap: 15px;
     }
     .right__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .top__video {
         display: flex;
         align-items: center;
         justify-content: space-between;

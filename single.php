@@ -17,9 +17,14 @@ get_header();?>
             <video src="http://vjs.zencdn.net/v/oceans.mp4" controls="" width="100%"></video>
          </div>
          <div class="video_detail">
-            <div class="top">
-               <span class="title"><?php the_title();?></span>
-               <span><em><i class="zi zi_heart"></i> DS Yêu Thích</em> <?php echo getpostviews(get_the_ID());?> lượt xem</span>
+            <div class="top__video">
+               <div class="video__title">
+                  <h1><?php the_title();?></h1>
+               </div>
+               <div class="video__viewslike">
+                  <span><em><i class="zi zi_heart"></i> DS Yêu Thích</em></span>
+                  <span><?php echo getpostviews(get_the_ID());?> lượt xem</span>
+               </div>
             </div>
             <div class="video__content">
                 <div class="video__left">
@@ -82,252 +87,12 @@ get_header();?>
          </div>
       </div>
       <div class="add_part">
-         <a href="http://" class="ad"><img src="./img/ad.png" alt=""></a>
-         <div class="video_hot">
-            <div class="mv_title">mới cập nhật</div>
-            <div class="swiper-container swiper-container-hot swiper-container-initialized swiper-container-horizontal swiper-container-free-mode">
-               <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                  <div class="swiper-slide swiper-slide-active" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide swiper-slide-next" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="swiper-slide" style="width: 106.5px; margin-right: 6px;">
-                     <a href="url">
-                        <img data-src="./img/pic1/2.jpg" class="swiper-lazy" width="100%">
-                        <div class="swiper-lazy-preloader"></div>
-                        <div class="cnt">
-                           <h2>title</h2>
-                           <h2>title2</h2>
-                           <span>10</span>
-                        </div>
-                     </a>
-                  </div>
-               </div>
-               <!-- Add Arrows -->
-               <div class="swiper-button-next swiper-button-white" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
-               <div class="swiper-button-prev swiper-button-white swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
-               <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-            </div>
-         </div>
-         <a href="http://" class="ad"><img src="./img/ad2.png" alt=""></a>
+         <a href="javascript:;" class="ad"><img src="<?php echo HENTAI_URL.'/img/ad.png';?>" alt="ads"></a>
+         <?php echo ShowSlider("lastest","",0,12, "","Phim Mới Nhất","side");?>
+         <a href="javascript:;" class="ad"><img src="<?php echo HENTAI_URL.'/img/ad2.png';?>" alt="ads"></a>
       </div>
    </div>
-   <div class="video_ralate">
-      <div class="list_head clear">
-         <div class="fl title">mới cập nhật</div>
-         <div class="fr all_list"><a href="calss">all</a></div>
-      </div>
-      <div class="swiper-container swiper-container-ralate swiper-container-initialized swiper-container-horizontal swiper-container-free-mode">
-         <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-            <div class="swiper-slide swiper-slide-active" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide swiper-slide-next" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-            <div class="swiper-slide" style="width: 149.167px; margin-right: 30px;">
-               <a href="url">
-                  <img class="swiper-lazy swiper-lazy-loaded" width="100%" src="./img/pic1/2.jpg">
-                  <div class="cnt">
-                     <h2>title</h2>
-                     <h2>title2</h2>
-                     <span>10</span>
-                  </div>
-               </a>
-            </div>
-         </div>
-         <!-- Add Arrows -->
-         <div class="swiper-button-next swiper-button-white" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
-         <div class="swiper-button-prev swiper-button-white swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
-         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-      </div>
-   </div>
-    <?php endwhile; wp_reset_postdata();?>
+   <?php echo ShowSlider("random","",128,12, "","Phim Liên Quan","single");?>
+   <?php endwhile; wp_reset_postdata();?>
 </div>
 <?php get_footer();?>

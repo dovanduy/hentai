@@ -1,11 +1,17 @@
 <div class="footer text-center bg-dark">
         <div class="container-fluid">
-            <div class="foot-logo"><img src="./img/foot_logo.png" alt=""></div>
+            <div class="foot-logo"><img src="<?php echo HENTAI_URL.'/img/foot_logo.png';?>" alt="ft-logo"></div>
             <div class="foot_nav">
-                <a class="text-light nav-link d-inline" href="">Phim mới câp nhật</a>
-                <a class="text-light nav-link d-inline" href="">Phim bộ hentai</a>
-                <a class="text-light nav-link d-inline" href="">Hentai 3d</a>
-                <a class="text-light nav-link d-inline" href="">Kho ảnh hentai</a>
+                <?php
+                    $args = [
+                        'theme_location'=> 'footer-menu',
+                        'container'=>false
+                    ];
+                    if(has_nav_menu('footer-menu')) {
+                        wp_nav_menu($args);
+                    }
+                   
+                ?>
             </div>
             <div class="copy">Copyright ©2019 <a class="nav-link d-inline text-light" href="">HentaiVN.Net</a> . All Rights Reserved.</div>
         </div>
@@ -74,35 +80,6 @@
             }
 
         })
-    </script>
-
-<script>
-        var swiper1 = new Swiper('.swiper-container-pic', {
-            // initialSlide: 1,
-            lazy: {
-                loadPrevNext: true,
-                loadPrevNextAmount: 1,
-            },
-            effect: 'slide',
-            //滑动速度
-            freeMode: true,
-            speed: 800,
-            //滑动方向
-            direction: 'horizontal',
-            slidesPerView: 5.3,
-            spaceBetween: 30,
-            centeredSlides: false,
-            breakpoints: { //响应布局设置
-                767: { //如果屏幕宽度小于<640
-                    slidesPerView: 2, //每页显示1个
-                    spaceBetween: 5 //每个间距是10
-                }
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
     </script>
 </body>
 </html>
