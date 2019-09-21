@@ -65,9 +65,13 @@ function hentai_add_scripts() {
     wp_enqueue_script('popper_js',HENTAI_URL.'/js/popper.min.js',['jquery'],'1.0.0', true);
     wp_enqueue_script('public_js',HENTAI_URL.'/js/public.js',['jquery'],'1.0.0', true);
     wp_enqueue_script('swiper_js',HENTAI_URL.'/js/swiper.min.js',['jquery'],'1.0.0', false);
+    
     if(is_page_template('img-gallery.php')) {
         wp_enqueue_script('vue','//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js',[],'1.0.0', false);
         wp_enqueue_script('axios','//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',[],'1.0.0', false);
+    }
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
     }
 }
 
@@ -297,12 +301,35 @@ function hentai_add_favorite() {
             echo 'no';
         } else {
             $newval = $val.','.$post_id;
-            update_user_meta($user_id,'favorite',$newval);
+            update_user_meta($user_id,'hentai_favorite',$newval);
             echo 'ok';
         }
     }
     exit;
 }
+
+
+// Ajax Remove Favorite
+add_action('wp_ajax_nopriv_hentai_remove_fav', 'hentai_remove_fav');
+add_action('wp_ajax_hentai_remove_fav', 'hentai_remove_fav');
+function hentai_remove_fav() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $movie_id = $_POST['post_id'];
+    $uid = get_current_user_id();
+    $list = get_user_meta($uid,'hentai_favorite',true);
+    $lists = explode(',',$list);
+    if (($key = array_search($movie_id, $lists)) !== false) {
+        unset($lists[$key]);
+        $newlist = implode(',',$lists);
+        update_user_meta($uid,'hentai_favorite',$newlist);
+        echo 'ok';
+    }
+    exit;
+}
+
+
 
 // Show SLider Func
 function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id = "", $title = "Phim Mới Nhất",$pos="home") {
@@ -437,4 +464,74 @@ function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id
     </script>
     <?php endif;
     return ob_get_clean();
+}
+
+// Comment List
+
+if ( ! function_exists( 'hentaivn_comments' ) ) {
+    /**
+     * Custom comments template.
+     * @param $comment
+     * @param $args
+     * @param $depth
+     */
+    function hentaivn_comments( $comment, $args, $depth ) {
+    	$GLOBALS['comment'] = $comment; ?>
+    	<li class="list_list" id="li-comment-<?php comment_ID() ?>">
+    		<?php
+            switch( $comment->comment_type ) :
+                case 'pingback':
+                case 'trackback': ?>
+                    <div id="comment-<?php comment_ID(); ?>" class="commentID">
+                        <div class="comment-author vcard">
+                            Pingback: <?php comment_author_link(); ?>
+                           
+                                <span class="ago"><?php comment_date( get_option( 'date_format' ) ); ?></span>
+                        </div>
+                        <?php if ( $comment->comment_approved == '0' ) : ?>
+                            <em><?php _e( 'Bình luận của bạn đang chờ phê duyệt.', 'hentaivn' ) ?></em>
+                            <br />
+                        <?php endif; ?>
+                    </div>
+                <?php
+                    break;
+
+                default: ?>
+                    <div id="comment-<?php comment_ID(); ?>" class="commentID" itemscope itemtype="http://schema.org/UserComments">
+                        <div class="comment-author vcard">
+                            <?php 
+                                
+                                $avatar = get_user_meta($comment->user_id,'avatar',true);
+                                if($avatar == '') {
+                                    $avatar = HENTAI_URL.'/img/user1.png';
+                                }
+                            ?>
+                            <img src="<?php echo $avatar;?>" alt="avatar" width="100%">
+                        </div>
+                        
+                        <div class="commentmetadata">
+                            <div class="comment__header">
+                                <?php printf( '<span class="fn" itemprop="creator" itemscope itemtype="http://schema.org/Person"><span itemprop="name">%s</span></span>', get_comment_author_link() ) ?>
+                                <span class="ago"> - <?php comment_date( get_option( 'date_format' ) ); ?></span>
+                            </div>
+                            <?php if ( $comment->comment_approved == '0' ) : ?>
+                                <em><?php _e( 'Bình luận của bạn đang chờ phê duyệt.', 'hentaivn' ) ?></em>
+                                <br />
+                            <?php endif; ?>
+                            <div class="commenttext" itemprop="commentText">
+                                <?php comment_text() ?>
+                            </div>
+                            <div class="commentdate-reply">
+                                
+                                <div class="reply">
+                                    <?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'],'reply_text' => __('Trả Lời', 'hentaivn') )) ) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                   break;
+             endswitch; ?>
+    	<!-- WP adds </li> -->
+    <?php }
 }

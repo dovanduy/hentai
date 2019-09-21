@@ -86,6 +86,7 @@ get_header();?>
             </div>
             <?php endif;?>
          </div>
+         <?php comments_template();?>
       </div>
       <div class="add_part">
          <a href="javascript:;" class="ad"><img src="<?php echo HENTAI_URL.'/img/ad.png';?>" alt="ads"></a>

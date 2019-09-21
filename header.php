@@ -76,9 +76,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <a class="dropdown-item" href="<?php echo home_url('/').'profile/';?>">
                             <i class="zi zi_idCheck"></i> Thông Tin Cá Nhân
                         </a>
-                        <a class="dropdown-item" href="#"><i class="zi zi_key"></i> Đổi Mật Khẩu</a>
-                        <a class="dropdown-item" href="#"><i class="zi zi_fileGraph"></i> Danh Sách Của Tôi</a>
-                        <a class="dropdown-item" href="#"><i class="zi zi_poweroff"></i> Đăng Xuất</a>
+                        <a class="dropdown-item" href="<?php echo home_url('/').'doi-mat-khau/';?>"><i class="zi zi_key"></i> Đổi Mật Khẩu</a>
+                        <a class="dropdown-item" href="<?php echo home_url('/').'danh-sach-cua-toi/';?>"><i class="zi zi_fileGraph"></i> Danh Sách Của Tôi</a>
+                        <a class="dropdown-item" href="<?php echo wp_logout_url(home_url()); ?>"><i class="zi zi_poweroff"></i> Đăng Xuất</a>
                     </div>
                 </div>
                 <div class="dropdown d-inline">

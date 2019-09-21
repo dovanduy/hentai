@@ -156,6 +156,7 @@
   display: inline-block;
   margin-right: 30px;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .search_cnt ul li:nth-child(6n) {

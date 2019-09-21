@@ -145,11 +145,103 @@ a.dropdown-item {
 .btn_edit {
     cursor: pointer;
 }
+#comments {
+    width: 100%;
+}
+.list_box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.list_box li {
+    list-style: none;
+}
+.commentID {
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-gap: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #5f5f5f;
+    padding: 5px 0;
+
+}
+.comment-author.vcard img {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: block;
+}
+.commentmetadata {
+    display: flex;
+    flex-direction: column;
+}
+.comment__header {
+    margin-bottom: 5px;
+}
+.comment__header span {
+    font-size: 1.1rem;
+}
+.comment__header span.ago {
+    font-style: italic;
+    font-size: 1rem;
+    color: #5f5f5f;
+}
+.commentdate-reply a {
+    color: #00fcff;
+}
+.commentdate-reply a:hover {
+    color: #00fcff;
+    text-decoration: underline;
+}
+#comments ul.children {
+    margin-left: 5vw;
+}
+.total-comments {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.form-submit #submit {
+    background: #00fcff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.comment-form-author input,.comment-form-email input,.comment-form-url input {
+    max-width: 100%;
+}
+#cancel-comment-reply-link {
+    color: #00fcff;
+}
+#cancel-comment-reply-link:hover {
+    text-decoration: underline;
+}
+button.close1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: red;
+    color: #FFF;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.8;
+}
 @media (min-width:968px) {
     .video__content {
         display: grid;
         grid-template-columns: 3fr 7fr;
         grid-gap: 15px;
+    }
+    .commentID {
+        grid-template-columns: 1fr 9fr;
     }
     .right__top {
         display: flex;
