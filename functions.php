@@ -1,7 +1,7 @@
 <?php
+
 define('HENTAI_URL',get_template_directory_uri());
 define('HENTAI_PATH',get_template_directory());
-
 
 add_action('after_setup_theme', 'hentai_after_setup_theme' );
 function hentai_after_setup_theme() {
@@ -20,7 +20,6 @@ function hentai_after_setup_theme() {
         show_admin_bar(false);
     }
 }
-
 
 add_action( 'widgets_init', 'hentai_register_sidebars' );
 function hentai_register_sidebars() {
@@ -58,7 +57,6 @@ function hentai_add_css() {
     wp_enqueue_style('index_css', HENTAI_URL.'/css/index.css');
 }
 
-
 add_action('wp_enqueue_scripts','hentai_add_scripts');
 function hentai_add_scripts() {
     wp_enqueue_script('bootstrap_js',HENTAI_URL.'/js/bootstrap.js',['jquery'],'1.0.0', true);
@@ -74,9 +72,6 @@ function hentai_add_scripts() {
 		wp_enqueue_script( 'comment-reply' );
     }
 }
-
-
-// Set Post Views
 
 function setpostview($postID){
     $count_key ='views';
@@ -101,26 +96,20 @@ function getpostviews($postID){
     return $count;
 }
 
-// Add Theme Support
 require_once HENTAI_PATH.'/inc/support.php';
 global $support;
 $support = new HenTai_Theme_Support;
 
-// Redirect When Login And Register Page
 require_once HENTAI_PATH.'/inc/login-register-redirect.php';
 
-
-// Add Register Page Func
 require_once HENTAI_PATH.'/inc/register.php';
 
-
-
-//Add MetaBox
 require_once HENTAI_PATH.'/inc/metabox.php';
 
+require_once HENTAI_PATH.'/inc/movie-slider.php';
 
+require_once HENTAI_PATH.'/inc/hentai-ajax.php';
 
-// Crop Image
 function HentaiCropImg($postID, $postcontent, $width, $height, $suffixes){
 
     global $support;
@@ -143,12 +132,6 @@ function HentaiCropImg($postID, $postcontent, $width, $height, $suffixes){
     return $imgUrl;
 }
 
-// Add Movie Widget Slider
-
-require_once HENTAI_PATH.'/inc/movie-slider.php';
-
-
-// Archive Title
 
 function archiveTitle() {
 
@@ -166,8 +149,6 @@ function archiveTitle() {
     }
     return $title;
 }
-
-
 
 function hentaiPagination( $custom_query = false ) {
     global $wp_query;
@@ -192,9 +173,9 @@ function hentaiPagination( $custom_query = false ) {
         $return='<ul class="pagination">';
         foreach ($pagination as $key => $value) {
             if($current == wp_strip_all_tags($value)){
-            $return.='<li class="paginate_button active"><a href="javascript:void(0)">'.wp_strip_all_tags($value).'</a></li>';
+                $return.='<li class="paginate_button active"><a href="javascript:void(0)">'.wp_strip_all_tags($value).'</a></li>';
             }else{
-            $return.='<li class="paginate_button ">'.$value.'</li>';
+                $return.='<li class="paginate_button ">'.$value.'</li>';
             }
             
         }
@@ -204,134 +185,16 @@ function hentaiPagination( $custom_query = false ) {
 
 }
 
+/**
+ * @param $type: lastest, random, most
+ * @param $opt: related-tag -- tags, related-cat -- categories
+ * @param $cat: ID of cateogry
+ * @param $number: number of post to show
+ * @param $post_id; ID of post for related opt
+ * @param $title: Custom title of SLide
+ * @param $pos: position of Slide -- homepage, single, sidebar
+ */
 
-// Ajax Load Gallery
-
-add_action('wp_ajax_nopriv_get_gallery_vue', 'get_gallery_vue');
-add_action('wp_ajax_get_gallery_vue', 'get_gallery_vue');
-function get_gallery_vue() {
-    if ( ! wp_verify_nonce( $_POST['nonce'], 'hentaivn' ) ) die('Nope');
-    $image_ids = get_posts(
-        array(
-            'post_type'      => 'attachment',
-            'post_mime_type' => 'image',
-            'post_status'    => 'inherit',
-            'posts_per_page' => - 1,
-            'fields'         => 'ids',
-        ) );
-    
-    $images = array_map( "wp_get_attachment_url", $image_ids );
-    header('Content-Type: application/json');
-    echo json_encode($images);
-    exit;
-}
-
-
-// Ajax Upload Avatar
-
-add_action('wp_ajax_nopriv_hentaivn_upload_avatar', 'hentaivn_upload_avatar');
-add_action('wp_ajax_hentaivn_upload_avatar', 'hentaivn_upload_avatar');
-function hentaivn_upload_avatar() {
-    $nonce = $_POST['nonce'];
-	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
-    die ( 'Nope!' );
-    $img_link = '';
-    $file = $_FILES['file'];
-    $uid = $_POST['uid'];
-    $target_dir = HENTAI_PATH.'/img/userava/';
-    $target_file = $target_dir.basename($file['name']);
-    $uploadOk = 1;
-    $error = '';
-
-    if (file_exists($target_file)) {
-        $error = "Avatar này đã tồn tại";
-        $uploadOk = 0;
-    }
-
-    if ($file['size'] > 3000000) {
-        $error = "Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!";
-        $uploadOk = 0;
-    }
-    
-    if ($uploadOk == 0) {
-        $error = "Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!";
-    
-    } else {
-        if (move_uploaded_file($file['tmp_name'], $target_file)) {
-            $imgDir = $target_dir.$file["name"];
-            $wpImageEditor =  wp_get_image_editor( $imgDir);
-            if ( ! is_wp_error( $wpImageEditor ) ) {
-                $wpImageEditor->resize(200, 200, array('center','center'));
-                $wpImageEditor->save( $imgDir);
-            }
-
-            $img_link = HENTAI_URL.'/img/userava/'.$file["name"];
-            update_user_meta($uid,'avatar',$img_link);
-
-        } else {
-            $error = 'Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!';
-        }
-    }
-
-    if($error == '') {
-        echo json_encode(['status'=>'ok','img'=>$img_link]);
-    } else {
-        echo json_encode(['status'=>'nope','error'=>$error]);
-    }
-    exit;
-}
-
-// Ajax Add Favorite
-
-add_action('wp_ajax_nopriv_hentai_add_favorite', 'hentai_add_favorite');
-add_action('wp_ajax_hentai_add_favorite', 'hentai_add_favorite');
-function hentai_add_favorite() {
-    $nonce = $_POST['nonce'];
-	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
-    die ( 'Nope!' );
-    $post_id = isset($_POST['post_id'])? $_POST['post_id']: '';
-    $user_id = get_current_user_id();
-    $val = get_user_meta($user_id,'hentai_favorite',true);
-    if($val == '') {
-        update_user_meta($user_id,'hentai_favorite',$post_id);
-        echo 'ok';
-    } else {
-        $vals = explode(',',$val);
-        if(in_array($post_id,$vals)) {
-            echo 'no';
-        } else {
-            $newval = $val.','.$post_id;
-            update_user_meta($user_id,'hentai_favorite',$newval);
-            echo 'ok';
-        }
-    }
-    exit;
-}
-
-
-// Ajax Remove Favorite
-add_action('wp_ajax_nopriv_hentai_remove_fav', 'hentai_remove_fav');
-add_action('wp_ajax_hentai_remove_fav', 'hentai_remove_fav');
-function hentai_remove_fav() {
-    $nonce = $_POST['nonce'];
-	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
-    die ( 'Nope!' );
-    $movie_id = $_POST['post_id'];
-    $uid = get_current_user_id();
-    $list = get_user_meta($uid,'hentai_favorite',true);
-    $lists = explode(',',$list);
-    if (($key = array_search($movie_id, $lists)) !== false) {
-        unset($lists[$key]);
-        $newlist = implode(',',$lists);
-        update_user_meta($uid,'hentai_favorite',$newlist);
-        echo 'ok';
-    }
-    exit;
-}
-
-
-
-// Show SLider Func
 function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id = "", $title = "Phim Mới Nhất",$pos="home") {
     
     $args = ['post_type' => 'post','post_per_page' => $number];
@@ -387,6 +250,7 @@ function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id
     $head = '';
     $item = 6.3;
     $space = 30;
+
     if($pos === 'home') {
         $wrap = 'main_type1';
         $head = '<div class="list_head clear">

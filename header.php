@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="collapse navbar-collapse" id="navbarsExample04">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể Loại</a>
+                    <a class="nav-link dropdown-toggle text-light" href="javascript:;" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể Loại</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <?php
                             $categories = get_categories();
