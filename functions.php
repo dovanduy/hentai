@@ -223,8 +223,88 @@ function get_gallery_vue() {
 }
 
 
-// Show SLider Func
+// Ajax Upload Avatar
 
+add_action('wp_ajax_nopriv_hentaivn_upload_avatar', 'hentaivn_upload_avatar');
+add_action('wp_ajax_hentaivn_upload_avatar', 'hentaivn_upload_avatar');
+function hentaivn_upload_avatar() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $img_link = '';
+    $file = $_FILES['file'];
+    $uid = $_POST['uid'];
+    $target_dir = HENTAI_PATH.'/img/userava/';
+    $target_file = $target_dir.basename($file['name']);
+    $uploadOk = 1;
+    $error = '';
+
+    if (file_exists($target_file)) {
+        $error = "Avatar này đã tồn tại";
+        $uploadOk = 0;
+    }
+
+    if ($file['size'] > 3000000) {
+        $error = "Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!";
+        $uploadOk = 0;
+    }
+    
+    if ($uploadOk == 0) {
+        $error = "Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!";
+    
+    } else {
+        if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            $imgDir = $target_dir.$file["name"];
+            $wpImageEditor =  wp_get_image_editor( $imgDir);
+            if ( ! is_wp_error( $wpImageEditor ) ) {
+                $wpImageEditor->resize(200, 200, array('center','center'));
+                $wpImageEditor->save( $imgDir);
+            }
+
+            $img_link = HENTAI_URL.'/img/userava/'.$file["name"];
+            update_user_meta($uid,'avatar',$img_link);
+
+        } else {
+            $error = 'Kích Thước ẢNh Của Bạn Quá Lớn. Vui Long Chọn Ảnh Khác, Xin Cảm Ơn!';
+        }
+    }
+
+    if($error == '') {
+        echo json_encode(['status'=>'ok','img'=>$img_link]);
+    } else {
+        echo json_encode(['status'=>'nope','error'=>$error]);
+    }
+    exit;
+}
+
+// Ajax Add Favorite
+
+add_action('wp_ajax_nopriv_hentai_add_favorite', 'hentai_add_favorite');
+add_action('wp_ajax_hentai_add_favorite', 'hentai_add_favorite');
+function hentai_add_favorite() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $post_id = isset($_POST['post_id'])? $_POST['post_id']: '';
+    $user_id = get_current_user_id();
+    $val = get_user_meta($user_id,'hentai_favorite',true);
+    if($val == '') {
+        update_user_meta($user_id,'hentai_favorite',$post_id);
+        echo 'ok';
+    } else {
+        $vals = explode(',',$val);
+        if(in_array($post_id,$vals)) {
+            echo 'no';
+        } else {
+            $newval = $val.','.$post_id;
+            update_user_meta($user_id,'favorite',$newval);
+            echo 'ok';
+        }
+    }
+    exit;
+}
+
+// Show SLider Func
 function ShowSlider($type = "lastest",$opt = "",$cat = 0, $number = 12, $post_id = "", $title = "Phim Mới Nhất",$pos="home") {
     
     $args = ['post_type' => 'post','post_per_page' => $number];

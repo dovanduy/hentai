@@ -8,15 +8,3 @@ jQuery(function($) {
         $(this).siblings("input").attr("type", "password")
     })
 })
-
-function changeEdit() {
-    $("#btn_edit, #step2").show()
-    $("#step1").hide()
-
-}
-
-function saveInfo() {
-    $("#btn_edit, #step2").hide()
-    $("#step1").show()
-
-}

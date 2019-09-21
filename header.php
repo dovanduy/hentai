@@ -71,17 +71,14 @@ if ( ! defined( 'ABSPATH' ) ) {
             ?>
             <div class="islogin">
                 <div class="dropdown d-inline">
-                    <a class="nav-link dropdown-toggle text-light" href="javascript:;" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo HENTAI_URL.'/img/user.png';?>" width="40" alt="" style="margin-right: 10px;"><?php echo $current_user->user_login;?></a>
+                    <a class="nav-link dropdown-toggle text-light" href="javascript:;" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $userimg;?>" width="40" alt="" style="margin-right: 10px;"><?php echo $current_user->user_login;?></a>
                     <div class="dropdown-menu dropdown-menu-right text-light" aria-labelledby="dropdown03">
-                        <a class="dropdown-item" href="#"><img src="<?php echo $userimg;?>" alt="user">
-                            <div>
-                                <span><?php echo $current_user->user_login;?></span>
-                                <span><?php echo $current_user->user_email;?></span>
-                            </div>
+                        <a class="dropdown-item" href="<?php echo home_url('/').'profile/';?>">
+                            <i class="zi zi_idCheck"></i> Thông Tin Cá Nhân
                         </a>
-                        <a class="dropdown-item" href="#"><img src="<?php echo HENTAI_URL.'/img/set.png';?>" alt="">đăng ký</a>
-                        <a class="dropdown-item" href="#"><img src="<?php echo HENTAI_URL.'/img/rect.png';?>" alt="">đăng ký</a>
-                        <a class="dropdown-item" href="#"><img src="<?php echo HENTAI_URL.'/img/openbook.png';?>" alt="">đăng ký</a>
+                        <a class="dropdown-item" href="#"><i class="zi zi_key"></i> Đổi Mật Khẩu</a>
+                        <a class="dropdown-item" href="#"><i class="zi zi_fileGraph"></i> Danh Sách Của Tôi</a>
+                        <a class="dropdown-item" href="#"><i class="zi zi_poweroff"></i> Đăng Xuất</a>
                     </div>
                 </div>
                 <div class="dropdown d-inline">

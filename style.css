@@ -125,6 +125,26 @@ Text Domain: hentaivn
 .foot_nav ul li a {
     color: #FFF;
 }
+.nav-link.dropdown-toggle.text-light img {
+    border-radius: 50%;
+}
+.grid-content .success {
+    color: #00fcff;
+}
+.grid-content .error {
+    color:red;
+}
+a.dropdown-item {
+    display: flex !important;
+    align-items: center;
+}
+.dropdown-item i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+.btn_edit {
+    cursor: pointer;
+}
 @media (min-width:968px) {
     .video__content {
         display: grid;

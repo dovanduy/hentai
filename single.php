@@ -10,6 +10,7 @@ get_header();?>
    </nav>
    <?php if(have_posts()) while(have_posts()): the_post();
         setpostview(get_the_ID());
+        $user_id = get_current_user_id();
    ?>
    <div class="video_layout">
       <div class="video_part">
@@ -22,7 +23,7 @@ get_header();?>
                   <h1><?php the_title();?></h1>
                </div>
                <div class="video__viewslike">
-                  <span><em><i class="zi zi_heart"></i> DS Yêu Thích</em></span>
+                  <span id="addlike"><em><i class="zi zi_heart"></i> DS Yêu Thích</em></span>
                   <span><?php echo getpostviews(get_the_ID());?> lượt xem</span>
                </div>
             </div>
@@ -93,6 +94,38 @@ get_header();?>
       </div>
    </div>
    <?php echo ShowSlider("random","",128,12, "","Phim Liên Quan","single");?>
+
+   <script>
+      var user_id = <?php echo $user_id;?>;
+      jQuery(document).ready(function($) {
+         $('#addlike').click(function() {
+
+            if(user_id == 0) {
+               alert('Bạn Cần Đăng Nhập Để Thực Hiện Chức Năng Này!!!');
+               return;
+            }
+
+            $.ajax({
+               type:'POST',
+               url: '<?php echo admin_url('admin-ajax.php');?>',
+               dataType:'text',
+               data: {
+                  'action':'hentai_add_favorite',
+                  'post_id':<?php echo get_the_ID();?>,
+                  'nonce': '<?php echo wp_create_nonce('hentaivn');?>'
+               },
+               success: function(data) {
+                  if(data == 'ok') {
+                     alert('Đã Thêm Phim Vào Danh Sách');
+                  } else {
+                     alert('Phim Đã Được Thêm Vào Danh Sách Của Bạn');
+                  }
+               }
+            });
+         })
+      });
+   </script>
    <?php endwhile; wp_reset_postdata();?>
 </div>
+
 <?php get_footer();?>
