@@ -137,8 +137,7 @@ function hentai_movie_paginate() {
     $args = [
         'post_type'=>'post',
         'paged'=>$page,
-        'orderby'=>'ID',
-        'order'=>'DESC'
+        'orderby'=>'rand',
     ];
     $data = [];
     $data['status'] = 'fail';
@@ -146,7 +145,6 @@ function hentai_movie_paginate() {
     if($query ->found_posts != '') {
         $data['status'] = 'success';
         $data['total'] = (int)$query ->found_posts;
-        $data['items'] = (int)$query ->post_count;
     }
     
     if($query->have_posts()) while($query->have_posts()) : $query->the_post();
@@ -181,7 +179,154 @@ function hentai_load_search() {
     if($query ->found_posts != '') {
         $data['status'] = 'success';
         $data['total'] = (int)$query ->found_posts;
-        $data['items'] = (int)$query ->post_count;
+    }
+    
+    if($query->have_posts()) while($query->have_posts()) : $query->the_post();
+        $img = HentaiCropImg($query->post->ID,$query->post->post_content,268,394,'-hentai-img-slider-');
+        $views = getpostviews(get_the_ID());
+        $title = mb_substr(get_the_title(),0,20).'...';
+        $data['movie'][] = new Movie(get_the_ID(),$title,get_the_permalink(),$img,$views);
+    endwhile; wp_reset_postdata();
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
+
+
+add_action('wp_ajax_nopriv_hentai_load_filter', 'hentai_load_filter');
+add_action('wp_ajax_hentai_load_filter', 'hentai_load_filter');
+
+function hentai_load_filter() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $page = isset($_POST['page']) ? $_POST['page']: 1;
+    $tag_ids = isset($_POST['tag_ids'])? $_POST['tag_ids']: '';
+    $cat_ids = isset($_POST['cat_ids'])? $_POST['cat_ids']: '';
+
+    $args = [
+        'post_type'=>'post',
+        'paged'=>$page,
+    ];
+
+    if($tag_ids != '' && $cat_ids != '') {
+        $tagArr = explode(',',$tag_ids);
+        $catArr = explode(',',$cat_ids);
+        $args['tax_query']['relation'] = 'AND';
+        foreach($tagArr as $tag) {
+            
+            $args['tax_query'][] = [
+                'taxonomy'=>'post_tag',
+                'field' =>'term_id',
+                'terms'=> $tag
+            ];
+        }
+        foreach($catArr as $cat) {
+            $args['tax_query'][] = [
+                'taxonomy'=>'category',
+                'field' =>'term_id',
+                'terms'=> $cat
+            ];
+        }
+        
+
+    } 
+    if($tag_ids != '' && $cat_ids == ''){
+        $tagArr = explode(',',$tag_ids);
+        $args['tax_query']['relation'] = 'AND';
+        foreach($tagArr as $tag) {
+            
+            $args['tax_query'][] = [
+                'taxonomy'=>'post_tag',
+                'field' =>'term_id',
+                'terms'=> $tag
+            ];
+        }
+    }
+    if($tag_ids == '' && $cat_ids != '') {
+        $catArr = explode(',',$cat_ids);
+        $args['tax_query']['relation'] = 'AND';
+        foreach($catArr as $cat) {
+            $args['tax_query'][] = [
+                'taxonomy'=>'category',
+                'field' =>'term_id',
+                'terms'=> $cat
+            ];
+        }
+    }
+
+    $data = [];
+    $data['status'] = 'success';
+    $data['total'] = 0;
+    $data['movie'] = [];
+    $query = new wp_query($args);
+    if($query ->found_posts != '') {
+        $data['status'] = 'success';
+        $data['total'] = (int)$query ->found_posts;
+    }
+    if($query->have_posts()) while($query->have_posts()): $query->the_post();
+        $img = HentaiCropImg($query->post->ID,$query->post->post_content,268,394,'-hentai-img-slider-');
+        $views = getpostviews(get_the_ID());
+        $title = mb_substr(get_the_title(),0,20).'...';
+        $data['movie'][] = new Movie(get_the_ID(),$title,get_the_permalink(),$img,$views);
+    endwhile; wp_reset_postdata();
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
+
+
+
+add_action('wp_ajax_nopriv_hentai_lastest_movie', 'hentai_lastest_movie');
+add_action('wp_ajax_hentai_lastest_movie', 'hentai_lastest_movie');
+
+function hentai_lastest_movie() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $args = [
+        'post_type'=>'post',
+        'orderby'=>'ID',
+        'order'=> 'DESC'
+    ];
+    $data = [];
+    $data['status'] = 'fail';
+    $query = new wp_query($args);
+    if($query ->found_posts != '') {
+        $data['status'] = 'success';
+        $data['total'] = (int)$query ->found_posts;
+    }
+    
+    if($query->have_posts()) while($query->have_posts()) : $query->the_post();
+        $img = HentaiCropImg($query->post->ID,$query->post->post_content,268,394,'-hentai-img-slider-');
+        $views = getpostviews(get_the_ID());
+        $title = mb_substr(get_the_title(),0,20).'...';
+        $data['movie'][] = new Movie(get_the_ID(),$title,get_the_permalink(),$img,$views);
+    endwhile; wp_reset_postdata();
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
+
+add_action('wp_ajax_nopriv_hentai_hot_movie', 'hentai_hot_movie');
+add_action('wp_ajax_hentai_hot_movie', 'hentai_hot_movie');
+
+function hentai_hot_movie() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $args = [
+        'post_type'=>'post',
+        'meta_key' =>'views',
+        'orderby'=>'meta_value_num'
+    ];
+    $data = [];
+    $data['status'] = 'fail';
+    $query = new wp_query($args);
+    if($query ->found_posts != '') {
+        $data['status'] = 'success';
+        $data['total'] = (int)$query ->found_posts;
     }
     
     if($query->have_posts()) while($query->have_posts()) : $query->the_post();

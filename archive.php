@@ -2,7 +2,7 @@
 <div class="search_box">
     <div class="title"><?php echo archiveTitle();?></div>
     <div class="search_cnt">
-        <ul class="cnt_box">
+        <ul class="cnt_box animated fadeIn">
             <?php if(have_posts()) while(have_posts()): the_post();
                     $img = HentaiCropImg($post->ID,$post->post_content,268,394,'-hentai-img-slider-');
             ?>

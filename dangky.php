@@ -7,7 +7,7 @@ if(is_user_logged_in()) {
 
 get_header();?>
 
-<div class="main_box">
+<div class="main_box animated fadeIn">
     <div class="container">
         <div class="login_box text-center">
             <h2 class="text-light">Đăng ký</h2>

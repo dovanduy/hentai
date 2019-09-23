@@ -4,7 +4,7 @@ if(!is_user_logged_in()) {
     wp_redirect(home_url('/'));
 }
 get_header();?>
-<div class="main_box center_box_1">
+<div class="main_box center_box_1 animated fadeIn">
    <div class="container">
       <div class="center_box text-center">
          <div class="center_title text-left">

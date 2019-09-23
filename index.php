@@ -1,6 +1,6 @@
 <?php get_header();?>
 <div class="index_box">
-    <div class="banner">
+    <div class="banner animated fadeIn">
         <img src="<?php echo HENTAI_URL.'/img/banner.png';?>" alt="">
         <div class="banner_info text-left">
             <span class="title">Xem miễn phí Hentai &amp; clip Anime 18+</span>

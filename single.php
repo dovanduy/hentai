@@ -12,7 +12,7 @@ get_header();?>
         setpostview(get_the_ID());
         $user_id = get_current_user_id();
    ?>
-   <div class="video_layout">
+   <div class="video_layout animated fadeIn">
       <div class="video_part">
          <div class="player">
             <video src="http://vjs.zencdn.net/v/oceans.mp4" controls="" width="100%"></video>

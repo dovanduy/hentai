@@ -234,6 +234,46 @@ button.close1 {
     cursor: pointer;
     opacity: 0.8;
 }
+.box_list {
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+.not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc3545;
+    font-size: 2rem;
+}
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
 @media (min-width:968px) {
     .video__content {
         display: grid;

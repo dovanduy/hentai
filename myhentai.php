@@ -8,7 +8,7 @@ if(!is_user_logged_in()) {
 
 get_header();?>
 
-<div class="search_box">
+<div class="search_box animated fadeIn">
     <div class="title">Phim Của Tôi</div>
     <div class="search_cnt">
         <ul class="cnt_box">
