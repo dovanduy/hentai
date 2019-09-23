@@ -64,7 +64,7 @@ function hentai_add_scripts() {
     wp_enqueue_script('public_js',HENTAI_URL.'/js/public.js',['jquery'],'1.0.0', true);
     wp_enqueue_script('swiper_js',HENTAI_URL.'/js/swiper.min.js',['jquery'],'1.0.0', false);
     
-    if(is_page_template('img-gallery.php')) {
+    if(is_page_template('img-gallery.php') || is_page_template('hentai-search.php')) {
         wp_enqueue_script('vue','//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js',[],'1.0.0', false);
         wp_enqueue_script('axios','//cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',[],'1.0.0', false);
     }
@@ -107,6 +107,8 @@ require_once HENTAI_PATH.'/inc/register.php';
 require_once HENTAI_PATH.'/inc/metabox.php';
 
 require_once HENTAI_PATH.'/inc/movie-slider.php';
+
+require_once HENTAI_PATH.'/inc/model.php';
 
 require_once HENTAI_PATH.'/inc/hentai-ajax.php';
 
@@ -398,4 +400,20 @@ if ( ! function_exists( 'hentaivn_comments' ) ) {
              endswitch; ?>
     	<!-- WP adds </li> -->
     <?php }
+}
+
+function getCategoryVue($type) {
+    $categories = [];
+    if($type ==  'cat') {
+        $categories = get_categories('category');
+    } else {
+        $categories = get_terms('post_tag');
+    }
+    $output = [];
+    if(count($categories) > 0) {
+        foreach($categories as $cat) {
+           $output[] = new Category($cat->term_id,$cat->name);
+        }  
+    }
+    return json_encode($output);
 }

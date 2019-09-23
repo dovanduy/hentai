@@ -122,3 +122,75 @@ function hentai_remove_fav() {
     }
     exit;
 }
+
+
+// Ajax Get Movie Paginate;
+
+add_action('wp_ajax_nopriv_hentai_movie_paginate', 'hentai_movie_paginate');
+add_action('wp_ajax_hentai_movie_paginate', 'hentai_movie_paginate');
+
+function hentai_movie_paginate() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $page = isset($_POST['page']) ? $_POST['page']: 1;
+    $args = [
+        'post_type'=>'post',
+        'paged'=>$page,
+        'orderby'=>'ID',
+        'order'=>'DESC'
+    ];
+    $data = [];
+    $data['status'] = 'fail';
+    $query = new wp_query($args);
+    if($query ->found_posts != '') {
+        $data['status'] = 'success';
+        $data['total'] = (int)$query ->found_posts;
+        $data['items'] = (int)$query ->post_count;
+    }
+    
+    if($query->have_posts()) while($query->have_posts()) : $query->the_post();
+        $img = HentaiCropImg($query->post->ID,$query->post->post_content,268,394,'-hentai-img-slider-');
+        $views = getpostviews(get_the_ID());
+        $title = mb_substr(get_the_title(),0,20).'...';
+        $data['movie'][] = new Movie(get_the_ID(),$title,get_the_permalink(),$img,$views);
+    endwhile; wp_reset_postdata();
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
+
+
+
+add_action('wp_ajax_nopriv_hentai_load_search', 'hentai_load_search');
+add_action('wp_ajax_hentai_load_search', 'hentai_load_search');
+function hentai_load_search() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $page = isset($_POST['page']) ? $_POST['page']: 1;
+    $query = isset($_POST['query']) ? $_POST['query']: '';
+    $args = [
+        'post_type'=>'post',
+        'paged'=>$page,
+        's' => $query
+    ];
+    $data = [];
+    $data['status'] = 'fail';
+    $query = new wp_query($args);
+    if($query ->found_posts != '') {
+        $data['status'] = 'success';
+        $data['total'] = (int)$query ->found_posts;
+        $data['items'] = (int)$query ->post_count;
+    }
+    
+    if($query->have_posts()) while($query->have_posts()) : $query->the_post();
+        $img = HentaiCropImg($query->post->ID,$query->post->post_content,268,394,'-hentai-img-slider-');
+        $views = getpostviews(get_the_ID());
+        $title = mb_substr(get_the_title(),0,20).'...';
+        $data['movie'][] = new Movie(get_the_ID(),$title,get_the_permalink(),$img,$views);
+    endwhile; wp_reset_postdata();
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
