@@ -20,10 +20,11 @@
 }
 
 .dialog-box .dialog {
-  width: 840px;
+  width: 100vw;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 8px;
   padding: 30px;
+  height: 100vh;
 }
 
 .dialog-box .dialog .dialog_head {
@@ -33,6 +34,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  align-items: center;
 }
 
 .dialog-box .dialog .dialog_head i {
@@ -62,7 +64,6 @@
 .dialog-box .dialog .cnt {
   text-align: left;
   color: #bebebe;
-  padding-top: 30px;
 }
 
 .dialog-box .dialog .cnt h2 {
@@ -335,4 +336,11 @@
 
 .dialog_pic .pic_box .pic_img img {
   width: 100%;
+}
+
+@media (min-width:968px) {
+  .dialog-box .dialog {
+    max-width: 80vw;
+    height: 80vh;
+  }
 }

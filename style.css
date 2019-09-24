@@ -235,7 +235,7 @@ button.close1 {
     opacity: 0.8;
 }
 .box_list {
-    max-height: 40vh;
+    max-height: 50vh;
     overflow-y: scroll;
 }
 .not-found {

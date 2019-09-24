@@ -94,15 +94,15 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
     <div class="search_box" >
     <div class="nav_list">
-        <span id="search_1" @click="openTag()"><i></i><em>Tags</em></span>
-        <span id="search_2" @click="openCat()"><i></i><em>Thể Loại</em></span>
-        <span id="search_3" @click="resetAll()"><i></i><em>Reset</em></span>
+        <span id="search_1" @click="openTag"><i></i><em>Tags</em></span>
+        <span id="search_2" @click="openCat"><i></i><em>Thể Loại</em></span>
+        <span id="search_3" @click="resetAll"><i></i><em>Reset</em></span>
         <span id="search_4" @click="isSortOpen = !isSortOpen">
             <i></i><em>Sắp Xếp</em>
             <div class="dialog3" v-if="isSortOpen">
                 <ul>
-                <li class="" @click="getLastestMovie()">New</li>
-                <li class="" @click="getHotestMovie()">Hot</li>
+                <li class="" @click="getLastestMovie">New</li>
+                <li class="" @click="getHotestMovie">Hot</li>
                 </ul>
             </div>
         </span>
@@ -110,9 +110,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="dialog-box" id="search_dialog" v-if="isTagOpen || isCatOpen">
         <div class="dialog dialog1" v-if="isTagOpen">
             <div class="dialog_head">
-                <i class="zi zi_windowclose close" @click="closeDialog()"></i>
+                <i class="zi zi_windowclose close" @click="closeDialog"></i>
                 <span class="title">Bao gồm tag</span>
-                <span class="reset" @click="resetTag()">Reset</span>
+                <span class="reset" @click="resetTag">Reset</span>
             </div>
             <div class="cnt">
                 <h2>Bao gồm tag</h2>
@@ -122,15 +122,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </div>
             </div>
             <div class="foot">
-                <button class="subimit_taget1" @click="loadFilter()">xác nhận</button>
-                <div><a href="javascript:;" class="close_1"  @click="closeDialog()">Hủy</a></div>
+                <button class="subimit_taget1" @click="loadFilter">xác nhận</button>
+                <div><a href="javascript:;" class="close_1"  @click="closeDialog">Hủy</a></div>
             </div>
         </div>
         <div class="dialog dialog2" v-if="isCatOpen">
             <div class="dialog_head">
-                <i class="zi zi_windowclose close"  @click="closeDialog()"></i>
+                <i class="zi zi_windowclose close"  @click="closeDialog"></i>
                 <span class="title">Bao gồm tag</span>
-                <span class="reset" @click="resetCat()">Reset</span>
+                <span class="reset" @click="resetCat">Reset</span>
             </div>
             <div class="cnt">
                 <h2>Bao gồm tag</h2>
@@ -140,8 +140,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </div>
             </div>
             <div class="foot">
-                <button class="subimit_taget2"  @click="loadFilter()">xác nhận</button>
-                <div><a href="javascript:;" class="close_2"  @click="closeDialog()">Hủy</a></div>
+                <button class="subimit_taget2"  @click="loadFilter">xác nhận</button>
+                <div><a href="javascript:;" class="close_2"  @click="closeDialog">Hủy</a></div>
             </div>
         </div>
     </div>
@@ -240,7 +240,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                 body.append('nonce','<?php echo wp_create_nonce("hentaivn");?>');
                 const res = await axios.post('<?php echo admin_url("admin-ajax.php");?>',body,{headers:{'Content-type': 'application/x-www-form-urlencoded'}});
                 if(res.data.status === 'success') {
-                    // console.log(res.data)
                     this.movies = res.data.movie;
                     this.totalItems = res.data.total;
                     this.animate = true;
@@ -260,10 +259,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 body.append('nonce','<?php echo wp_create_nonce("hentaivn");?>');
                 const res = await axios.post('<?php echo admin_url("admin-ajax.php");?>',body,{headers:{'Content-type': 'application/x-www-form-urlencoded'}});
                 if(res.data.status === 'success') {
-                    console.log(res.data)
                     this.isSearch = true;
                     this.movies = res.data.movie;
                     this.totalItems = res.data.total;
+                    this.animate = true;
                 }
             },
             pagination(c, m) {
@@ -308,7 +307,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                 } else {
                     this.loadFilter();
                 }
-                console.log(this.animate);
                 
             },
            
@@ -348,6 +346,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         this.movies = res.data.movie;
                         this.totalItems = res.data.total;
                         this.closeDialog();
+                        this.animate = true;
                     }
                 } else {
                     this.closeDialog();
@@ -401,6 +400,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 const res = await axios.post('<?php echo admin_url("admin-ajax.php");?>',body,{headers:{'Content-type': 'application/x-www-form-urlencoded'}});
                 if(res.data.status === 'success') {
                     this.movies = res.data.movie;
+                    this.animate = true;
                 }
 
             },
@@ -411,6 +411,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 const res = await axios.post('<?php echo admin_url("admin-ajax.php");?>',body,{headers:{'Content-type': 'application/x-www-form-urlencoded'}});
                 if(res.data.status === 'success') {
                     this.movies = res.data.movie;
+                    this.animate = true;
                 }
 
             }
