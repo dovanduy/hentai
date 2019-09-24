@@ -332,10 +332,14 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 10px solid #3e3e3e;
+  height: 60vh;
 }
 
 .dialog_pic .pic_box .pic_img img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 @media (min-width:968px) {

@@ -71,6 +71,10 @@ function hentai_add_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
     }
+    if(is_single()) {
+        wp_enqueue_script('jwplayer','//ssl.p.jwpcdn.com/player/v/8.1.3/jwplayer.js',[],'1.0.0', false);
+        wp_add_inline_script('jwplayer','jwplayer.key = "W7zSm81+mmIsg7F+fyHRKhF3ggLkTqtGMhvI92kbqf/ysE99";');
+    }
 }
 
 add_action( 'init', 'rename_posts_hentai_label' );

@@ -14,9 +14,22 @@ get_header();?>
    ?>
    <div class="video_layout animated fadeIn">
       <div class="video_part">
-         <div class="player">
+         <div id="player">
             <video src="http://vjs.zencdn.net/v/oceans.mp4" controls="" width="100%"></video>
          </div>
+         <script>
+             const player = jwplayer('player');
+             player.setup({
+                sources: [{
+                    file: "http://n4.hdviet.com/e5b5aeb2bf951941fca47b546571b1bd/s8/092019/23/Fast_and_Furious_Presents_Hobbs_and_Shaw_2019_720p_HDRip_H/playlist_h.m3u8",
+                    type: "m3u8"
+                }],
+                width: "100%",
+                aspectratio: "16:9",
+                primary: "html5",
+                autostart: true
+             })
+         </script>
          <div class="video_detail">
             <div class="top__video">
                <div class="video__title">

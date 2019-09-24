@@ -18,5 +18,15 @@
     </div>
     <?php wp_footer();?>
 </div>
+<?php if(!is_page_template('hentai-search.php')) {?>
+    <script>
+        jQuery('.btn.my-2.my-sm-0').click(function(e) {
+            e.preventDefault();
+            var se = jQuery('#s').val();
+            if(se.trim() === '') return;
+            jQuery('#navbarsExample04 form').submit();
+        })
+    </script>
+<?php } ?>
 </body>
 </html>

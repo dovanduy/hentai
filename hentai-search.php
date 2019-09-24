@@ -39,8 +39,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-md-0 mr-auto form-inline-search" action="<?php echo home_url('/');?>" method="get">
-                    <input class="form-control"  id="search" v-model="search" @keyup="loadMovie()" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-md-0 mr-auto form-inline-search">
+                    <input class="form-control"  id="search" v-model="search" @keyup="loadMovie" placeholder="Search" aria-label="Search">
                 </form>
                 <?php if(!is_user_logged_in()):?>
                 <div class="unlogin">
@@ -161,7 +161,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         
         </ul>
  
-        <div class="not-found" v-else> Xin Lỗi Chúng Tôi Không Tìm Thấy Movie Bạn Yêu Cầu</div>
+        <div class="not-found" v-else-if="isSearch || isFilter"> Xin Lỗi Chúng Tôi Không Tìm Thấy Movie Bạn Yêu Cầu</div>
     </div>
     <div id="ampagination-bootstrap" >
         <ul class="pagination" v-if="pageNumber.length">
@@ -310,7 +310,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 
             },
            
-            loadMovie() {
+            loadMovie(e) {
                 this.loadSearch();
             },
             toogleTags(id) {
