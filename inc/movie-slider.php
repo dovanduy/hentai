@@ -110,7 +110,8 @@ class movie_slider_widget extends WP_Widget {
                 ];
             } else {
                
-				$link = home_url('/').'phim-moi-nhat/';
+                //$link = home_url('/').'phim-moi-nhat/';
+                $link = 'javascript:;';
                 $term = $this->getAllTerm();
                 $args['tax_query'] = [
                     [
@@ -123,7 +124,8 @@ class movie_slider_widget extends WP_Widget {
         } else if($type === 'most'){
             $args['meta_key'] = 'views';
             $args['orderby'] = 'meta_value_num';
-			$link = home_url('/').'thinh-hanh/';
+            //$link = home_url('/').'thinh-hanh/';
+            $link = 'javascript:;';
             if($cat != 0) {
                 $args['tax_query'] = [
                     [
@@ -155,7 +157,8 @@ class movie_slider_widget extends WP_Widget {
                     ]
                 ];
             } else {
-				$link = home_url('/').'phim-moi-nhat/';
+                //$link = home_url('/').'phim-moi-nhat/';
+                $link = 'javascript:;';
                 $term = $this->getAllTerm();
                 $args['tax_query'] = [
                     [

@@ -255,6 +255,29 @@ button.close1 {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
+.erro_dk {
+    position: fixed;
+    bottom: -140px;
+    left: 5px;
+    background: #00fcf5;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border-radius: 1;
+    transition: 0.5s;
+}
+.erro_dk.active{
+    bottom: 20px;
+}
+.err {
+    color: #000;
+    text-align: left;
+}
+.err_dn {
+    padding: 10px 0;
+    color: red;
+}
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0

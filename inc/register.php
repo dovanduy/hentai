@@ -86,7 +86,14 @@ function registration_validation($username,$email,$password,$repassword,$referer
             echo $error . '<br/>';
             echo '</div>';
         }
-        echo '</div>';
+        echo '</div>
+        <script>
+            document.querySelector(".erro_dk").classList.add("active");
+            setTimeout(function(){
+                document.querySelector(".erro_dk").classList.remove("active");
+            },4000)
+        </script>
+        ';
     }
 }
 
@@ -100,10 +107,8 @@ function complete_registration() {
         ];
         $user = wp_insert_user($userdata);
         echo '<script>
-            document.querySelector(".alert1").style.display="block";
-            document.querySelector(".alert__close").addEventListener("click", function() {
-                document.querySelector(".alert1").style.display = "none";
-            })
+            alert("Đăng Ký Thành Công");
+            window.location.href="'.home_url("/")."dang-nhap/".'";
         </script>';
     }
 }

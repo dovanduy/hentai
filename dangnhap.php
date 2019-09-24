@@ -10,6 +10,9 @@ get_header();?>
     <div class="container">
         <div class="login_box text-center animated fadeIn">
             <h2 class="text-light">Đăng Nhập</h2>
+            <?php if(isset($_GET['login']) && $_GET['login'] === 'failed') {
+                echo '<div class="err_dn">Tên Đăng Nhập Hoặc Mật Khẩu Không Chính Xác</div>';
+            }?>
             <form id="loginForm" action="<?php echo site_url( '/wp-login.php' ); ?>" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control"  name="log" id="log" placeholder="Tên Đăng Nhập">
