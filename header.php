@@ -42,8 +42,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-md-0 mr-auto form-inline-search" action="<?php echo home_url('/');?>" method="get">
-                <input class="form-control"  name="s" id="search" value="<?php the_search_query(); ?>" placeholder="Search" aria-label="Search">
+            <form role="search" class="form-inline my-2 my-md-0 mr-auto form-inline-search" action="<?php echo home_url('/');?>" method="GET">
+                <input class="form-control"  name="s" id="s" value="<?php echo get_search_query(); ?>" placeholder="Search" aria-label="Search">
                 <button class="btn my-2 my-sm-0" type="submit"><i class="zi zi_searchBlack"></i></button>
             </form>
             <?php if(!is_user_logged_in()):?>

@@ -73,6 +73,47 @@ function hentai_add_scripts() {
     }
 }
 
+add_action( 'init', 'rename_posts_hentai_label' );
+add_action( 'admin_menu', 'rename_posts_hentai' );
+function rename_posts_hentai() {
+    global $menu;
+    global $submenu;
+    $menu[5][0] = __("Hentai", 'hentaivn');
+    $submenu['edit.php'][5][0] = __("Tất Cả Phim", 'hentaivn');
+    $submenu['edit.php'][10][0] = __("Thêm Phim Mới", 'hentaivn');
+    echo '';
+}
+function rename_posts_hentai_label() {
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = __("Hentai", 'hentaivn');
+    $labels->singular_name = __("Phim", 'hentaivn');
+    $labels->add_new = __("Phim Mới", 'hentaivn');
+    $labels->add_new_item = __("Phim Mới", 'hentaivn');
+    $labels->edit_item = __("Sửa Phim", 'hentaivn');
+    $labels->new_item = __("Phim", 'hentaivn');
+    $labels->view_item = __("Xem Phim", 'hentaivn');
+    $labels->search_items = __("Tìm Phim", 'hentaivn');
+    $labels->not_found = __("Không Tìm Thấy Phim", 'hentaivn');
+    $labels->not_found_in_trash = __("Không Tìm Thấy Phim", 'hentaivn');
+}
+
+require_once HENTAI_PATH.'/inc/support.php';
+global $support;
+$support = new HenTai_Theme_Support;
+
+require_once HENTAI_PATH.'/inc/login-register-redirect.php';
+
+require_once HENTAI_PATH.'/inc/register.php';
+
+require_once HENTAI_PATH.'/inc/metabox.php';
+
+require_once HENTAI_PATH.'/inc/movie-slider.php';
+
+require_once HENTAI_PATH.'/inc/model.php';
+
+require_once HENTAI_PATH.'/inc/hentai-ajax.php';
+
 function setpostview($postID){
     $count_key ='views';
     $count = get_post_meta($postID, $count_key, true);
@@ -95,22 +136,6 @@ function getpostviews($postID){
     }
     return $count;
 }
-
-require_once HENTAI_PATH.'/inc/support.php';
-global $support;
-$support = new HenTai_Theme_Support;
-
-require_once HENTAI_PATH.'/inc/login-register-redirect.php';
-
-require_once HENTAI_PATH.'/inc/register.php';
-
-require_once HENTAI_PATH.'/inc/metabox.php';
-
-require_once HENTAI_PATH.'/inc/movie-slider.php';
-
-require_once HENTAI_PATH.'/inc/model.php';
-
-require_once HENTAI_PATH.'/inc/hentai-ajax.php';
 
 function HentaiCropImg($postID, $postcontent, $width, $height, $suffixes){
 

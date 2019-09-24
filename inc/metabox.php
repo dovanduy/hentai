@@ -57,8 +57,8 @@ class OxxoMovieEspisode {
 			<thead>
 				<tr>
 					<th>#</th>
-					<th> Title </th>
-					<th> Server </th>
+					<th> Series </th>
+					<th> Resolution </th>
 					<th> URL Source </th>
 					<th> Control </th>
 				</tr>

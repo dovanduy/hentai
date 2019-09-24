@@ -4,9 +4,9 @@ if(!is_user_logged_in()) {
     wp_redirect(home_url('/'));
 }
 get_header();?>
-<div class="main_box center_box_1 animated fadeIn">
+<div class="main_box center_box_1">
    <div class="container">
-      <div class="center_box text-center">
+      <div class="center_box text-center animated fadeIn">
          <div class="center_title text-left">
             <h2 class="text-light">Quản lý tài khoản
                <span class="fr" id="btn_edit" onclick="saveInfo()" style="display: inline;">Lưu</span>
@@ -106,7 +106,6 @@ get_header();?>
                     processData: false,
                     contentType: false,
                     success: function(data) {
-                        console.log(data);
                         if(data.status === 'ok') {
                             var img = data.img;
                             $('.avatar-uploader img').attr('src',img);

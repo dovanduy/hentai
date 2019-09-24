@@ -1,14 +1,24 @@
 <?php get_header();?>
-<div class="index_box">
-    <div class="banner animated fadeIn">
-        <img src="<?php echo HENTAI_URL.'/img/banner.png';?>" alt="">
-        <div class="banner_info text-left">
-            <span class="title">Xem miễn phí Hentai &amp; clip Anime 18+</span>
-            <span class="cnt">
-                Thưởng thức <em>không giới hạn</em> tuyệt phẩm hentai &amp; anime lớn nhất Châu Á. Với kho video clip chất lượng HD, Full HD sẽ làm thỏa mãn niềm hứng thú trong bạn.
-            </span>
-        </div>
+<div class="search_box">
+    <div class="title"><?php echo archiveTitle();?></div>
+    <div class="search_cnt">
+        <ul class="cnt_box animated fadeIn">
+            <?php if(have_posts()) while(have_posts()): the_post();
+                    $img = HentaiCropImg($post->ID,$post->post_content,268,394,'-hentai-img-slider-');
+            ?>
+            <li>
+                <a href="<?php the_permalink();?>"><img src="<?php echo $img;?>" alt="" width="100%">
+                    <div class="cnt">
+                        <h2><?php echo mb_substr(get_the_title(),0,20).'...';?></h2>
+                        <span><?php echo getpostviews(get_the_ID());?>  <?php echo __(' views','hentaivn');?></span>
+                    </div>
+                </a>
+            </li>
+            <?php endwhile; wp_reset_postdata();?>
+        </ul>
     </div>
-    <?php if(is_active_sidebar('home-sidebar')): dynamic_sidebar('home-sidebar'); endif;?>
+    <div id="ampagination-bootstrap">
+        <?php echo hentaiPagination();?>
+    </div>
 </div>
 <?php get_footer();?>
