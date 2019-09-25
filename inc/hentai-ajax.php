@@ -339,3 +339,24 @@ function hentai_hot_movie() {
     echo json_encode($data);
     exit;
 }
+
+
+add_action('wp_ajax_nopriv_hentai_load_espisode', 'hentai_load_espisode');
+add_action('wp_ajax_hentai_load_espisode', 'hentai_load_espisode');
+function hentai_load_espisode() {
+    $nonce = $_POST['nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'hentaivn' ) )
+    die ( 'Nope!' );
+    $post_id = isset($_POST['post_id'])? $_POST['post_id']: '';
+    $espisode = isset($_POST['espisode'])? $_POST['espisode']: '';
+    if($post_id != '' && $espisode != '') {
+        $val = get_post_meta($post_id,'espisode_movie',true);
+        $valArr = json_decode($val,true);
+        $res = $valArr[$espisode];
+        if(count($res) > 0) {
+            header('Content-Type: application/json');
+            echo json_encode($res);
+        }
+    }
+    exit;
+}

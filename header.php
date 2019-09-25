@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <?php
                             $categories = get_categories();
                             if($categories) {
+                                echo '<a class="dropdown-item" href="'.home_url("/").'search/">Search</a>';
                                 foreach($categories as $cat) {
                                     echo '<a class="dropdown-item" href="'.get_category_link($cat->term_id).'">'.$cat->name.'</a>';
                                 }

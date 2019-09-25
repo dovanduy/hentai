@@ -18,17 +18,74 @@ get_header();?>
             <video src="http://vjs.zencdn.net/v/oceans.mp4" controls="" width="100%"></video>
          </div>
          <script>
-             const player = jwplayer('player');
-             player.setup({
-                sources: [{
-                    file: "http://n4.hdviet.com/e5b5aeb2bf951941fca47b546571b1bd/s8/092019/23/Fast_and_Furious_Presents_Hobbs_and_Shaw_2019_720p_HDRip_H/playlist_h.m3u8",
-                    type: "m3u8"
-                }],
-                width: "100%",
-                aspectratio: "16:9",
-                primary: "html5",
-                autostart: true
-             })
+
+            (function($) {
+                $.fn.hentaiPlayer = function(opts) {
+                    var settings = $.extend({},opts);
+                    init();
+                    function init() {
+                        getLinkPlay(settings.post_id,settings.espisode,settings.nonce,settings.url,playVideo);
+                        changeEspisode();
+                    }
+                    function getLinkPlay(post_id,espisode,nonce,url, callback) {
+                        
+                        $.ajax({
+                            type:'POST',
+                            url: url,
+                            dataType:'json',
+                            data: {
+                                'post_id':post_id,
+                                'espisode':espisode,
+                                'nonce':nonce,
+                                'action':'hentai_load_espisode'
+                            },
+                            success: function(data) {
+                                if(data) {
+                                    console.log(data);
+                                    callback(data);
+                                }
+                            }
+                        })
+                    }
+
+                    function playVideo(data) {
+                        var sources = [];
+                        $.each(data, function(index,value) {
+                            sources.push({"file":`http://23.106.126.72/video/${value[1]}`,"label":`${value[0]}`,"type":"mp4"});
+                        })
+                        const player = jwplayer('player');
+                        player.setup({
+                            sources: sources,
+                            width: "100%",
+                            aspectratio: "16:9",
+                            primary: "html5",
+                            autostart: true
+                        });
+                    }
+
+                    function changeEspisode() {
+                        var a = $('.espisode li a');
+                        if(a != undefined) {
+                            $('.espisode li a').click(function() {
+                                if($(this).hasClass('active')) return;
+                                a.removeClass('active');
+                                $(this).addClass('active');
+                                var espisode = parseInt($(this).text());
+                                getLinkPlay(settings.post_id,espisode,settings.nonce,settings.url, playVideo);
+                            });
+                            
+                        }
+                        
+                    }
+                    return this;
+                }
+            }(jQuery))
+            jQuery(document).ready(function($) {
+                var espisode = $('.espisode ul li a.active').text();
+                if(espisode != undefined) {
+                    $('.video_part').hentaiPlayer({'post_id':<?php echo get_the_ID();?>,'espisode':parseInt(espisode),'nonce':'<?php echo wp_create_nonce("hentaivn");?>','url':'<?php echo admin_url("admin-ajax.php");?>'});
+                }
+            });
          </script>
          <div class="video_detail">
             <div class="top__video">
@@ -79,9 +136,14 @@ get_header();?>
                         ?>
                         <div class="espisode">
                             <ul>
-                                <?php foreach($espiArr as $key => $ep):?>
-                                    <li><a href="javascript:;"><?php echo $key;?></a></li>
-                                <?php endforeach;?>
+                                
+                                <?php
+                                    $i = 0;
+                                    foreach($espiArr as $key =>$ep) {
+                                        echo ' <li><a href="javascript:;" class="'.($i == 0? 'active': '').'">'.$key.'</a></li>';
+                                        $i++;
+                                    }
+                                ?>
 
                             </ul>
                         </div>

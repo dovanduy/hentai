@@ -278,6 +278,10 @@ button.close1 {
     padding: 10px 0;
     color: red;
 }
+.espisode ul li a.active {
+    background: #00fcff;
+    color: #000;
+}
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0
