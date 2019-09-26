@@ -15,7 +15,6 @@ get_header();?>
    <div class="video_layout animated fadeIn">
       <div class="video_part">
          <div id="player">
-            <video src="http://vjs.zencdn.net/v/oceans.mp4" controls="" width="100%"></video>
          </div>
          <script>
 

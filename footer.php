@@ -26,6 +26,14 @@
             if(se.trim() === '') return;
             jQuery('#navbarsExample04 form').submit();
         })
+        window.onscroll = function() {
+            var offset = window.pageYOffset;
+            if(offset > 100) {
+                document.querySelector('.header nav.navbar').style.background = '#1d1d1d';
+            } else {
+                document.querySelector('.header nav.navbar').style.background = 'transparent';
+            }
+        }
     </script>
 <?php } ?>
 </body>

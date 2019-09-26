@@ -79,21 +79,13 @@ function registration_validation($username,$email,$password,$repassword,$referer
     }
 
     if (is_wp_error($reg_errors)) {
-        echo '<div class="erro_dk" >';
-        foreach ($reg_errors->get_error_messages() as $error) {
-            echo '<div class="err">';
-            echo '<strong>ERROR</strong>:';
-            echo $error . '<br/>';
-            echo '</div>';
-        }
-        echo '</div>
-        <script>
-            document.querySelector(".erro_dk").classList.add("active");
+        $err = $reg_errors->get_error_messages();
+        echo '<div class="erro_dk" ><strong>LỖI: </strong>'.$err[0].'</div>';
+        echo '<script>
             setTimeout(function(){
-                document.querySelector(".erro_dk").classList.remove("active");
-            },4000)
-        </script>
-        ';
+                document.querySelector(".erro_dk").style.display="none";
+            },3000);
+        </script>';
     }
 }
 

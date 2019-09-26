@@ -10,7 +10,7 @@ get_header();?>
     <div class="container">
         <div class="login_box text-center animated fadeIn">
             <h2 class="text-light">Đăng Nhập</h2>
-            <?php if(isset($_GET['login']) && $_GET['login'] === 'failed') {
+            <?php if(isset($_GET['login']) && $_GET['login'] === 'failed' || isset($_GET['login']) && $_GET['login'] === 'empty') {
                 echo '<div class="err_dn">Tên Đăng Nhập Hoặc Mật Khẩu Không Chính Xác</div>';
             }?>
             <form id="loginForm" action="<?php echo site_url( '/wp-login.php' ); ?>" method="post">
@@ -27,7 +27,7 @@ get_header();?>
                     <label class="text-light mr-auto">
                         <input class="form-check-input" type="checkbox"> Nhớ mật khẩu
                     </label>
-                    <a href="<?php echo home_url('/').'wp-login.php?action=lostpassword';?>" class="nav-link text-light">Quên mật khẩu?</a>
+                    <a href="<?php echo home_url('/').'lost-password/';?>" class="nav-link text-light">Quên mật khẩu?</a>
                 </div>
                 <hr>
                 <div class="form-group">

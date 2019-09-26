@@ -21,7 +21,7 @@
 
 .dialog-box .dialog {
   width: 100vw;
-  background: rgba(0, 0, 0, 0.7);
+  background: #1d1d1d;
   border-radius: 8px;
   padding: 30px;
   height: 100vh;
@@ -78,7 +78,9 @@
   margin-bottom: 30px;
   display: block;
 }
-
+.foot {
+  padding: 10px 0 0 0;
+}
 .dialog-box .dialog .cnt .box_list span {
   background: unset;
   border-radius: 18px;
@@ -96,6 +98,7 @@
   margin-right: 10px;
   cursor: pointer;
   transition: all .6s;
+  color: #FFF;
 }
 
 .dialog-box .dialog .cnt .box_list span:hover, .dialog-box .dialog .cnt .box_list span.cur {

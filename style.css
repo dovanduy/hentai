@@ -256,20 +256,13 @@ button.close1 {
     animation-name: fadeIn;
 }
 .erro_dk {
-    position: fixed;
-    bottom: -140px;
-    left: 5px;
-    background: #00fcf5;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    border-radius: 1;
-    transition: 0.5s;
+    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 20px;
+    color: #FFF;
+    border-left: 3px solid red;
 }
-.erro_dk.active{
-    bottom: 20px;
-}
+
 .err {
     color: #000;
     text-align: left;
@@ -281,6 +274,24 @@ button.close1 {
 .espisode ul li a.active {
     background: #00fcff;
     color: #000;
+}
+.navbar-nav .nav-link {
+    text-transform: uppercase;
+}
+.lost-info {
+    text-align: left;
+    color: #FFF;
+    padding-left: 20px;
+    border-left: 3px solid #00fcff;
+    margin-bottom: 20px;
+}
+@media (max-width:768px) {
+    form.form-inline.my-2.my-md-0.mr-auto.form-inline-search {
+        display: none;
+    }
+    .navbar-nav .nav-link {
+        padding-left: 15px !important;
+    }
 }
 @-webkit-keyframes fadeIn {
     0% {
